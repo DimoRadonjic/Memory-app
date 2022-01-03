@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import SingleCard from './components/SingleCard';
 
 const cardImages = [
   { src: '/img/helmet-1.png' },
@@ -29,14 +30,7 @@ class App1 extends React.Component {
         <button onClick={this.shuffleCards}>New Game</button>
         <div className='card-grid'>
           {this.state.cards.map((card) => {
-            return (
-              <div className='card' key={card.id}>
-                <div>
-                  <img className='front' src={card.src} alt='card front' />
-                  <img className='back' src='/img/cover.png' alt='card back' />
-                </div>
-              </div>
-            );
+            return <SingleCard card={card} key={card.id} />;
           })}
         </div>
       </div>
