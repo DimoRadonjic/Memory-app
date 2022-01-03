@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import SingleCard from './components/SingleCard';
 
@@ -11,7 +11,7 @@ const cardImages = [
   { src: '/img/sword-1.png' },
 ];
 
-class App extends React.Component {
+class App extends Component {
   state = {
     cards: [],
     turn: 0,
@@ -32,8 +32,28 @@ class App extends React.Component {
       : this.setState({ choiceOne: card });
   };
 
+  componentDidUpdate() {
+    const resetTurn = () => {
+      this.setState({
+        choiceOne: null,
+        choiceTwo: null,
+        turn: this.state.turn + 1,
+      });
+      console.log('Choices reset turn + 1');
+    };
+    console.log('State: ', this.state);
+    if (this.state.choiceOne && this.state.choiceTwo) {
+      if (this.state.choiceOne.src === this.state.choiceTwo.src) {
+        console.log('Cards Match');
+        resetTurn();
+      } else {
+        console.log('Cards Don"t Match');
+        resetTurn();
+      }
+    }
+  }
+
   render() {
-    console.log(this.state.cards);
     return (
       <div className='App'>
         <h1>Magic Match</h1>
