@@ -1,13 +1,47 @@
 import React from 'react';
 import './App.css';
 
-function App() {
-  return (
-    <div className='App'>
-      <h1>Magic Match</h1>
-      <button>New Game</button>
-    </div>
-  );
+const cardImages = [
+  { src: '/img/helmet-1.png' },
+  { src: '/img/potion-1.png' },
+  { src: '/img/ring-1.png' },
+  { src: '/img/scroll-1.png' },
+  { src: '/img/shield-1.png' },
+  { src: '/img/sword-1.png' },
+];
+
+class App1 extends React.Component {
+  state = {
+    cards: [],
+    turn: 0,
+  };
+  shuffleCards = () => {
+    const shuffledCards = [...cardImages, ...cardImages]
+      .sort(() => Math.random() - 0.5)
+      .map((card) => ({ ...card, id: Math.random() }));
+    this.setState({ cards: shuffledCards, turn: 0 });
+  };
+  render() {
+    console.log(this.state.cards);
+    return (
+      <div className='App'>
+        <h1>Magic Match</h1>
+        <button onClick={this.shuffleCards}>New Game</button>
+        <div className='card-grid'>
+          {this.state.cards.map((card) => {
+            return (
+              <div className='card' key={card.id}>
+                <div>
+                  <img className='front' src={card.src} alt='card front' />
+                  <img className='back' src='/img/cover.png' alt='card back' />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default App1;
