@@ -95,6 +95,7 @@ class App extends Component {
             );
           })}
         </div>
+        <p>Turn : {this.state.turn}</p>
       </div>
     );
   }
