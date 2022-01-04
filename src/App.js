@@ -62,7 +62,7 @@ class App extends Component {
         resetTurn();
       } else {
         console.log('Cards Don"t Match');
-        setTimeout(() => resetTurn(), 1500);
+        setTimeout(() => resetTurn(), 1000);
       }
     }
   }
