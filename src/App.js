@@ -62,7 +62,7 @@ class App extends Component {
         resetTurn();
       } else {
         console.log('Cards Don"t Match');
-        resetTurn();
+        setTimeout(() => resetTurn(), 1500);
       }
     }
   }
@@ -80,6 +80,11 @@ class App extends Component {
                 card={card}
                 key={card.id}
                 handleChoice={this.handleChoice}
+                flipped={
+                  card === this.state.choiceOne ||
+                  card === this.state.choiceTwo ||
+                  card.matched
+                }
               />
             );
           })}
