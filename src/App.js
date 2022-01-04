@@ -17,6 +17,7 @@ class App extends Component {
     turn: 0,
     choiceOne: null,
     choiceTwo: null,
+    disabled: false,
   };
 
   shuffleCards = () => {
@@ -38,8 +39,8 @@ class App extends Component {
         choiceOne: null,
         choiceTwo: null,
         turn: this.state.turn + 1,
+        disabled: false,
       });
-      //console.log('Choices reset turn + 1');
     };
 
     const newCards = (prevCards) => {
@@ -52,12 +53,13 @@ class App extends Component {
       });
     };
 
-    console.log('Inside CDU : ', this.state.cards);
     if (this.state.choiceOne && this.state.choiceTwo) {
       if (this.state.choiceOne.src === this.state.choiceTwo.src) {
         console.log('Cards Match');
         this.setState((prevState) => {
-          return { cards: newCards(prevState.cards) };
+          return {
+            cards: newCards(prevState.cards),
+          };
         });
         resetTurn();
       } else {
@@ -73,7 +75,6 @@ class App extends Component {
         <h1>Magic Match</h1>
         <button onClick={this.shuffleCards}>New Game</button>
         <div className='card-grid'>
-          {console.log('Cards: ', this.state.cards)}
           {this.state.cards.map((card) => {
             return (
               <SingleCard
@@ -84,6 +85,11 @@ class App extends Component {
                   card === this.state.choiceOne ||
                   card === this.state.choiceTwo ||
                   card.matched
+                }
+                disabled={
+                  this.state.choiceOne && this.state.choiceTwo
+                    ? !this.state.disabled
+                    : this.state.disabled
                 }
               />
             );
