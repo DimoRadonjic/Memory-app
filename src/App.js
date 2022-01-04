@@ -3,12 +3,12 @@ import './App.css';
 import SingleCard from './components/SingleCard';
 
 const cardImages = [
-  { src: '/img/helmet-1.png' },
-  { src: '/img/potion-1.png' },
-  { src: '/img/ring-1.png' },
-  { src: '/img/scroll-1.png' },
-  { src: '/img/shield-1.png' },
-  { src: '/img/sword-1.png' },
+  { src: '/img/helmet-1.png', matched: false },
+  { src: '/img/potion-1.png', matched: false },
+  { src: '/img/ring-1.png', matched: false },
+  { src: '/img/scroll-1.png', matched: false },
+  { src: '/img/shield-1.png', matched: false },
+  { src: '/img/sword-1.png', matched: false },
 ];
 
 class App extends Component {
@@ -39,12 +39,26 @@ class App extends Component {
         choiceTwo: null,
         turn: this.state.turn + 1,
       });
-      console.log('Choices reset turn + 1');
+      //console.log('Choices reset turn + 1');
     };
-    console.log('State: ', this.state);
+
+    const newCards = (prevCards) => {
+      return prevCards.map((card) => {
+        if (card.src === this.state.choiceOne.src) {
+          return { ...card, matched: true };
+        } else {
+          return card;
+        }
+      });
+    };
+
+    console.log('Inside CDU : ', this.state.cards);
     if (this.state.choiceOne && this.state.choiceTwo) {
       if (this.state.choiceOne.src === this.state.choiceTwo.src) {
         console.log('Cards Match');
+        this.setState((prevState) => {
+          return { cards: newCards(prevState.cards) };
+        });
         resetTurn();
       } else {
         console.log('Cards Don"t Match');
@@ -59,6 +73,7 @@ class App extends Component {
         <h1>Magic Match</h1>
         <button onClick={this.shuffleCards}>New Game</button>
         <div className='card-grid'>
+          {console.log('Cards: ', this.state.cards)}
           {this.state.cards.map((card) => {
             return (
               <SingleCard
