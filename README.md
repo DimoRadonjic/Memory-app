@@ -29,8 +29,7 @@ Check out the live demo of the game: [Magic Match Memory Game Demo](https://memo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/magic-match-memory-game.git
-
+    https://github.com/DimoRadonjic/Memory-app.git
 
  ## Technologies Used
  - HTML, CSS for game layout and styling.
